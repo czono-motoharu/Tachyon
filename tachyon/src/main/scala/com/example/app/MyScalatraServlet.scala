@@ -1,9 +1,16 @@
 package com.example.app
 
+import com.example.data.DatabaseSessionSupport
+import com.example.models.TachyonDb
 import org.scalatra._
 import scalate.ScalateSupport
 
-class MyScalatraServlet extends TachyonStack {
+class MyScalatraServlet extends TachyonStack
+  with SessionSupport
+  with DatabaseSessionSupport
+  with ScalateSupport
+  with MethodOverride
+  with FlashMapSupport {
 
   get("/") {
     <html>
@@ -16,12 +23,9 @@ class MyScalatraServlet extends TachyonStack {
 
 
   get("/yo"){
-    <html>
-      <body>
-        <h1>Yo</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-      </body>
-    </html>
+    TachyonDb.create
+
+    redirect("/")
   }
 
 }
