@@ -24,7 +24,6 @@ class MyScalatraServlet extends TachyonStack
 
   get("/yo"){
     TachyonDb.create
-
     redirect("/")
   }
 

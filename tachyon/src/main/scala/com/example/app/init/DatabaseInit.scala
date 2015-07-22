@@ -3,20 +3,19 @@ package com.example.data
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import org.slf4j.LoggerFactory
 import org.squeryl.{Session, SessionFactory}
-import org.squeryl.adapters.H2Adapter
-
+import org.squeryl.adapters.MySQLAdapter
 
 trait DatabaseInit {
   val logger = LoggerFactory.getLogger(getClass)
 
   val databaseUsername = "root"
   val databasePassword = "root"
-  val databaseConnection = "jdbc:h2:mem:TachyonDb"
+  val databaseConnection = "jdbc:mysql://localhost:3306/TachyonDb"
 
   var cpds = new ComboPooledDataSource
 
   def configureDb(){
-    cpds.setDriverClass("org.h2.Driver")
+    cpds.setDriverClass("com.mysql.jdbc.Driver")
     cpds.setJdbcUrl(databaseConnection)
     cpds.setUser(databaseUsername)
     cpds.setPassword(databasePassword)
@@ -29,7 +28,7 @@ trait DatabaseInit {
 
     def connection = {
       logger.info("Creating connection with c3po connection pool")
-      Session.create(cpds.getConnection, new H2Adapter)
+      Session.create(cpds.getConnection, new MySQLAdapter)
     }
 
   }
