@@ -1,3 +1,6 @@
+[See new repo](https://github.com/czono-motoharu/scala-tutorial1)
+
+
 #Tachyon
 
 ##概要
